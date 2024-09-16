@@ -38,7 +38,7 @@ export default function TabLayout() {
         options={{
           title: 'Nutrisi',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'nutrition-outline' : 'nutrition-outline'} color={color} />
+            <TabBarIcon name={focused ? 'nutrition' : 'nutrition-outline'} color={color} />
           ),
         }}
       />
