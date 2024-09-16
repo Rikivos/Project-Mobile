@@ -25,7 +25,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="latihan"
         options={{
           title: 'Latihan',
           tabBarIcon: ({ color, focused }) => (
@@ -43,7 +43,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="fitness"
+        name="akun"
         options={{
           title: 'Akun',
           tabBarIcon: ({ color, focused }) => (

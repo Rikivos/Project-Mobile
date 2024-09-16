@@ -1,70 +1,78 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function NutrisiScreen() {
+  // Dummy data untuk content nutrisi
+  const contentData = Array(12).fill("CONTENT NUTRISI");
 
-export default function Nutrisi() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <View style={styles.container}>
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#000" />
+        <TextInput
+          placeholder="Cari"
+          style={styles.searchInput}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Wel</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </View>
+
+      {/* Grid Content */}
+      <FlatList
+        data={contentData}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2} // Untuk membuat dua kolom
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.contentCard}>
+            <Text style={styles.contentText}>{item}</Text>
+          </TouchableOpacity>
+        )}
+        columnWrapperStyle={styles.row}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    padding: 20,
+  },
+  searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 10,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  searchInput: {
+    marginLeft: 10,
+    fontSize: 16,
+    flex: 1,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  row: {
+    justifyContent: 'space-between',
+    marginBottom: 15,
+  },
+  contentCard: {
+    backgroundColor: '#ddd',
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    borderRadius: 50, // Membuat bentuk bulat
+    marginBottom: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '48%', // Ukuran lebar card
+  },
+  contentText: {
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'center',
   },
 });
